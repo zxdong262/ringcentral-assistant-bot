@@ -3,6 +3,8 @@
 
 Assistant Glip bot to help check/set user/company information, Created with [ringcentral-chatbot-framework](https://github.com/zxdong262/ringcentral-chatbot-python) and [ringcentral-chatbot-factory](https://github.com/zxdong262/ringcentral-chatbot-factory)
 
+![screen](screenshots/screen.png)
+
 ## Table of contents <!-- omit in toc -->
 
 - [Prerequisites](#prerequisites)

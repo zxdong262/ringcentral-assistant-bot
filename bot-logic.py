@@ -19,8 +19,8 @@ def helpMsg(botId, groupId, user, authed = False):
 
 **cmd** list
 
-**user info** -- show current date
-**company info** -- show current time
+**user info** -- show your user info
+**company info** -- show your company info
   '''
 
 def botJoinPrivateChatAction(bot, groupId, user):
@@ -46,11 +46,11 @@ def botGotPostAddAction(
   bot got group chat message: text
   bot could send some response
   """
-  print(user)
+
   if not f'![:Person]({bot.id})' in text:
     return
 
-  msg = ',,,,'
+  msg = ''
 
   if user.id == '':
     msg = helpMsg(bot.id, groupId, user)
