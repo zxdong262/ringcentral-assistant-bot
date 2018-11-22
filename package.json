@@ -8,6 +8,16 @@
     "framework",
     "python"
   ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/zxdong262/ringcentral-assistant-bot.git"
+  },
+  "author": "Drake Zhao <drake.zhao@ringcentral.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/zxdong262/ringcentral-assistant-bot/issues"
+  },
+  "homepage": "https://github.com/zxdong262/ringcentral-assistant-bot#readme",
   "devDependencies": {
     "ngrok": "3.1.0",
     "serverless": "1.33.2",
