@@ -18,6 +18,7 @@ Assistant Glip bot to help check/set user/company information, Created with [rin
 - Python3.6+ and Pip3
 - Nodejs 8.10+/npm, recommend using [nvm](https://github.com/creationix/nvm) to install nodejs/npm
 - Create the bot App: Login to [developer.ringcentral.com](https://developer.ringcentral.com) and create an `public` `Server/Bot` app with permissions: `ReadContacts, ReadMessages, ReadPresence, Contacts, ReadAccounts, SMS, InternalMessages, ReadCallLog, ReadCallRecording, WebhookSubscriptions, Glip`
+- Create the user App: Login to [developer.ringcentral.com](https://developer.ringcentral.com) and create an `public` `Browser-based` app with permissions: `ReadContacts, ReadMessages, ReadPresence, Contacts, ReadAccounts, SMS, InternalMessages, ReadCallLog, ReadCallRecording, WebhookSubscriptions, Glip`
 
 ## Development & Quick start
 
@@ -45,13 +46,24 @@ npm i
 
 # create env file
 cp .sample.env .env
+
+# and goto your ringcentral bot app setting page, set OAuth Redirect URI to https://https://xxxxx.ngrok.io/bot-oauth
+# and goto your ringcentral user app setting page, set OAuth Redirect URI to https://https://xxxxx.ngrok.io/user-oauth
+
 # then edit .env, set proper setting,
-# and goto your ringcentral app setting page, set OAuth Redirect URI to https://https://xxxxx.ngrok.io/bot-oauth
 RINGCENTRAL_BOT_SERVER=https://xxxxx.ngrok.io
 
-## for bots auth required, get them from your ringcentral app page
+## common required
+RINGCENTRAL_SERVER=https://platform.devtest.ringcentral.com
+RINGCENTRAL_BOT_SERVER=https:xxxxx.ngrok.io
+
+## for bots auth required, from your ringcentral bot app setting page
 RINGCENTRAL_BOT_CLIENT_ID=
 RINGCENTRAL_BOT_CLIENT_SECRET=
+
+## for user auth, from your ringcentral user app setting page
+RINGCENTRAL_USER_CLIENT_ID=
+RINGCENTRAL_USER_CLIENT_SECRET=
 
 # create bot logic file
 cp bot-logic.py config.py
@@ -130,7 +142,7 @@ bin/watch
 - Create API Gateway for your Lambda function, shape as `https://xxxx.execute-api.us-east-1.amazonaws.com/default/poc-your-bot-name-dev-bot/{action+}`
 - Make sure your Lambda function role has permission to read/write dynamodb(Set this from AWS IAM roles, could simply attach `AmazonDynamoDBFullAccess` and `AWSLambdaRole` policies to Lambda function's role)
 - Make sure your Lambda function's timeout more than 5 minutes
-- Do not forget to set your RingCentral app's redirect URL to Lambda's API Gateway URL, `https://xxxx.execute-api.us-east-1.amazonaws.com/default/poc-your-bot-name-dev-bot/bot-oauth` for bot app.
+- Do not forget to set your RingCentral app's redirect URL to Lambda's API Gateway URL, `https://xxxx.execute-api.us-east-1.amazonaws.com/default/poc-your-bot-name-dev-bot/bot-oauth` for bot app.`https://xxxx.execute-api.us-east-1.amazonaws.com/default/poc-your-bot-name-dev-bot/user-oauth` for user app.
 
 ## License
 
