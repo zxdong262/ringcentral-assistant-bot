@@ -1,0 +1,4 @@
+flask
+python-dotenv
+pylint
+ringcentral_bot_framework >=0.0.8
