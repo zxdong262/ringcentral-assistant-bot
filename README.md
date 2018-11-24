@@ -66,6 +66,7 @@ RINGCENTRAL_USER_CLIENT_ID=
 RINGCENTRAL_USER_CLIENT_SECRET=
 
 # create bot logic file
+# All bot logic is in config.py, 70 lines only
 cp bot-logic.py config.py
 
 # run local dev server
