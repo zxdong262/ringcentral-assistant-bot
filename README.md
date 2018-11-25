@@ -107,11 +107,11 @@ Edit `lambda/serverless.yml`, and make sure you set the proper name and required
     NODE_ENV: production
     # ringcentral apps
 
-    ## bots
+    ## bot app
     RINGCENTRAL_BOT_CLIENT_ID:
     RINGCENTRAL_BOT_CLIENT_SECRET:
 
-    ## if you only have one bot app, it is not needed
+    ## user app
     RINGCENTRAL_USER_CLIENT_ID: xxxx
     RINGCENTRAL_USER_CLIENT_SECRET: xxxx
 
