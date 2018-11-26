@@ -3,6 +3,8 @@
 
 Assistant Glip bot to help check/set user/company information, Created with [ringcentral-chatbot-framework](https://github.com/zxdong262/ringcentral-chatbot-python) and [ringcentral-chatbot-factory](https://github.com/zxdong262/ringcentral-chatbot-factory)
 
+This demo bot shows how to access user data.
+
 ![screen](screenshots/screen.png)
 
 ## Table of contents <!-- omit in toc -->
@@ -112,8 +114,8 @@ Edit `lambda/serverless.yml`, and make sure you set the proper name and required
     RINGCENTRAL_BOT_CLIENT_SECRET:
 
     ## user app
-    RINGCENTRAL_USER_CLIENT_ID: xxxx
-    RINGCENTRAL_USER_CLIENT_SECRET: xxxx
+    RINGCENTRAL_USER_CLIENT_ID:
+    RINGCENTRAL_USER_CLIENT_SECRET: 
 
     ## common
     RINGCENTRAL_SERVER: https://platform.devtest.ringcentral.com
