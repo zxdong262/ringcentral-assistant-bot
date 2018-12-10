@@ -41,7 +41,8 @@ def botGotPostAddAction(
   creatorId,
   user,
   text,
-  dbAction
+  dbAction,
+  handledByExtension
 ):
   """
   bot got group chat message: text
