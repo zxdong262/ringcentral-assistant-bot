@@ -1,7 +1,7 @@
 
 # ringcentral-assistant-bot <!-- omit in toc -->
 
-Assistant Glip bot to help check/set user/company information, Created with [ringcentral-chatbot-framework](https://github.com/zxdong262/ringcentral-chatbot-python) and [ringcentral-chatbot-factory](https://github.com/zxdong262/ringcentral-chatbot-factory)
+Assistant Glip bot to help check/set user/company information, Created with [ringcentral-chatbot-framework](https://github.com/zxdong262/ringcentral-chatbot-python) and [ringcentral-chatbot-factory](https://github.com/zxdong262/ringcentral-chatbot-factory-py)
 
 This demo bot shows how to access user data.
 
@@ -81,6 +81,7 @@ cp bot-logic.py config.py
 - Login to [https://glip-app.devtest.ringcentral.com](https://glip-app.devtest.ringcentral.com), find the bot by searching its name. Talk to the bot.
 - Edit config.py to change bot bahavior and test in [https://glip-app.devtest.ringcentral.com](https://glip-app.devtest.ringcentral.com)
 
+
 ## Building and Deploying to AWS Lambda
 
 AWS Lambda with API Gateway and DynamoDB would give us a flexible way to deploy the bot.
@@ -98,7 +99,7 @@ aws_secret_access_key = <your aws_secret_access_key>
 For more information, refer to https://docs.aws.amazon.com/general/latest/gr/aws-security-credentials.html
 
 ```bash
-cp dev/lambda/serverless.sample.yml devlambda/serverless.yml
+cp dev/lambda/serverless.sample.yml dev/lambda/serverless.yml
 ```
 
 Edit `lambda/serverless.yml`, and make sure you set the proper name and required env.
@@ -106,46 +107,63 @@ Edit `lambda/serverless.yml`, and make sure you set the proper name and required
 ```yml
 # you can define service wide environment variables here
   environment:
-    NODE_ENV: production
+    ENV: production
     # ringcentral apps
 
-    ## bot app
+    ## for bots auth, required
     RINGCENTRAL_BOT_CLIENT_ID:
     RINGCENTRAL_BOT_CLIENT_SECRET:
 
-    ## user app
+    ## for user auth, could be empty if do not need user auth
     RINGCENTRAL_USER_CLIENT_ID:
-    RINGCENTRAL_USER_CLIENT_SECRET: 
+    RINGCENTRAL_USER_CLIENT_SECRET:
 
     ## common
     RINGCENTRAL_SERVER: https://platform.devtest.ringcentral.com
-    RINGCENTRAL_BOT_SERVER: https://xxxx.execute-api.us-east-1.amazonaws.com/default/poc-your-bot-name-dev-bot
+    RINGCENTRAL_BOT_SERVER: https://xxxxx.execute-api.us-east-1.amazonaws.com/dev
 
     # db
     DB_TYPE: dynamodb
-    DYNAMODB_TABLE_PREFIX: rc_bot2
+    DYNAMODB_TABLE_PREFIX: ringcentral-bot
     DYNAMODB_REGION: us-east-1
+    DYNAMODB_ReadCapacityUnits: 1
+    DYNAMODB_WriteCapacityUnits: 1
 
 ```
 
 Deploy to AWS Lambda with `bin/deploy`
 
 ```bash
-# install serverless related modules
-npm i
-
-# Run this cmd to deploy to AWS Lambda, full build, may take more time
+# Run this cmd to deploy to AWS Lambda
 bin/deploy
-
-## watch Lambda server log
-bin/watch
-
 ```
 
-- Create API Gateway for your Lambda function, shape as `https://xxxx.execute-api.us-east-1.amazonaws.com/default/poc-your-bot-name-dev-bot/{action+}`
-- Make sure your Lambda function role has permission to read/write dynamodb(Set this from AWS IAM roles, could simply attach `AmazonDynamoDBFullAccess` and `AWSLambdaRole` policies to Lambda function's role)
-- Make sure your Lambda function's timeout more than 5 minutes
-- Do not forget to set your RingCentral app's redirect URL to Lambda's API Gateway URL, `https://xxxx.execute-api.us-east-1.amazonaws.com/default/poc-your-bot-name-dev-bot/bot-oauth` for bot app.`https://xxxx.execute-api.us-east-1.amazonaws.com/default/poc-your-bot-name-dev-bot/user-oauth` for user app.
+After successful deploy, you will get the https api url:
+
+```bash
+Service Information
+service: ringcentral-bot
+stage: dev
+region: us-east-1
+stack: ringcentral-bot-dev
+api keys:
+  None
+endpoints:
+  ANY - https://dddddd.execute-api.us-east-1.amazonaws.com/dev/{action+}
+  GET - https://dddddd.execute-api.us-east-1.amazonaws.com/dev/
+```
+
+Relpace `RINGCENTRAL_BOT_SERVER: https://xxxxx.execute-api.us-east-1.amazonaws.com/dev` in serverless.yml with
+`RINGCENTRAL_BOT_SERVER: https://dddddd.execute-api.us-east-1.amazonaws.com/dev`
+ and run `bin/deploy` to deploy again.
+
+Watch Lambda server log by run:
+
+```bash
+bin/watch
+```
+
+Do not forget to set your RingCentral app's redirect URL to Lambda's API Gateway URL, `https://dddddd.execute-api.us-east-1.amazonaws.com/dev/bot-oauth` for bot app.
 
 ## License
 
