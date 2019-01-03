@@ -58,13 +58,13 @@ def botGotPostAddAction(
     msg = helpMsg(bot.id, groupId, user)
 
   elif 'user info' in text:
-    userInfo = user.platform.get('/account/~/extension/~')
+    userInfo = user.platform.get('/restapi/v1.0/account/~/extension/~')
     txt = json.loads(userInfo.text())
     txt = json.dumps(txt, indent=2)
     msg = f'![:Person]({user.id}) your user info json is:\n' + txt
 
   elif 'company info' in text:
-    compInfo = user.platform.get('/account/~')
+    compInfo = user.platform.get('/restapi/v1.0/account/~')
     txt = json.loads(compInfo.text())
     txt = json.dumps(txt, indent=2)
     msg = f'![:Person]({user.id}) your company info json is:\n' + txt
