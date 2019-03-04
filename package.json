@@ -1,6 +1,6 @@
 {
   "name": "ringcentral-assistant-bot",
-  "version": "0.0.1",
+  "version": "0.2.0",
   "description": "Assistant bot to help check/set user/company information",
   "keywords": [
     "ringcentral",
